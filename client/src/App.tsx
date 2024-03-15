@@ -1,11 +1,14 @@
+import Home from "@/pages/Home"
+import Navbar from "./components/Navbar"
 
 
 function App() {
 
   return (
-    <>
-      <h1 className="text-center">hiiii</h1>
-    </>
+    <div className='py-6 px-12'>
+      <Navbar />
+      <Home />
+    </div>
   )
 }
 

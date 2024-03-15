@@ -1,3 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Quando&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+:root {
+  --yinmn-blue: #3A4A77ff;
+  --melon: #F2A598ff;
+  --sky-magenta: #BF7FA7ff;
+  --dark-purple: #292233ff;
+  --ultra-violet: #5A6491ff;
+  /* create a dark mode black color */
+  --dark-mode-black: #1E1E1E;
+}
+
+body{
+  background-color: var(--dark-mode-black);
+  color: white;
+  font-family: "Oxanium", sans-serif;
+  letter-spacing: 2px;
+  /* color: var(--ultra-violet); */
+}
+
+.quando{
+  font-family: "Quando", "Oxanium", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.transparent{
+  filter: brightness(0) invert(1);
+}
+

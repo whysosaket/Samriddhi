@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { IoQrCodeOutline } from "react-icons/io5";
 import JoinFundQR from "./JoinFundQR";
 import { useContext } from "react";

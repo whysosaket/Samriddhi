@@ -59,7 +59,7 @@ const _404 = () => {
                     to="/"
                     className="bg-orange-400 hover:bg-orange-600  px-5 py-3 text-sm shadow-sm font-medium tracking-wider text-gray-50 rounded-full hover:shadow-lg"
                   >
-                    Got to Home
+                    Go to Home
                   </Link>
                 </motion.div>
               </div>

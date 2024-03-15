@@ -1,5 +1,6 @@
 import { GiSesame } from "react-icons/gi";
 import {motion} from "framer-motion";
+import {Link} from "react-router-dom";
 
 
 const Navbar = () => {
@@ -16,12 +17,18 @@ const Navbar = () => {
         <div className="flex align-middle">
             <div className="flex align-middle mx-4 my-auto">
                 <ul className="flex my-auto">
-                    <li className="mx-4">Home</li>
-                    <li className="mx-4">About</li>
-                    <li className="mx-4">Contact</li>
+                    <li className="mx-4">
+                        <Link to="/">Home</Link>
+                    </li>
+                    <li className="mx-4">
+                        <Link to="/about">About</Link>
+                    </li>
+                    <li className="mx-4">
+                        <Link to="/contact">Contact</Link>
+                    </li>
                 </ul>
             </div>
-            <button className="bg-primary hover:bg-[#e37655] text-black px-8 py-2 rounded-lg mx-4 my-auto">Login</button>
+            <Link to="/login" className="bg-primary hover:bg-[#e37655] text-black px-8 py-2 rounded-lg mx-4 my-auto">Login</Link>
         </div>
     </motion.nav>
   )

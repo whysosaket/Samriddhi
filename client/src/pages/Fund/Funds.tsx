@@ -32,7 +32,7 @@ const Funds = () => {
       >
         My Funds
       </motion.h1>
-      <div className="flex flex-wrap justify-center w-full">
+      <div className="flex flex-wrap md:flex-row flex-col justify-center w-full">
         {funds.map((fund, index) => {
           return (
             <motion.div
@@ -40,7 +40,7 @@ const Funds = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, delay: index * 0.2 }}
               key={index}
-              className="w-1/2 md:w-1/3 lg:w-1/4"
+              className="w-full md:w-1/3 lg:w-1/4"
             >
               <FundItem fund={fund} />
             </motion.div>
@@ -48,7 +48,7 @@ const Funds = () => {
         })}
       </div>
     </div>
-    <Link to="/createfund" className="absolute bottom-10 right-10 bg-primary hover:bg-[#e37655] h-20 w-20 flex justify-center text-white rounded-full mx-4 my-auto quando">
+    <Link to="/createfund" className="fixed bottom-4 right-2 md:bottom-10 md:right-10 bg-primary hover:bg-[#e37655] h-20 w-20 flex justify-center text-white rounded-full mx-4 my-auto quando">
         <MdLibraryAdd size={30} className="my-auto" />
     </Link>
     </>

@@ -98,12 +98,21 @@ const withdrawFund = async (req: CustomRequest, res: Response) => {
       await transaction.save();
 
       fund.balance -= amount;
+      // check if fund has enough balance
+        if (fund.balance < 0) {
+            return res.status(400).json({ success, error: "Insufficient balance" });
+        }
+
       fund.transactions.push(transaction._id);
       await fund.save();
       success = true;
       return res.json({ success, balance: fund.balance });
     } else {
       myuser.balance -= amount;
+        // check if user has enough balance
+            if (myuser.balance < 0) {
+                return res.status(400).json({ success, error: "Insufficient balance" });
+            }
       let transaction = new Transaction({
         amount,
         by: myuser._id,

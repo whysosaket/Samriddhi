@@ -61,7 +61,7 @@ const items = [
       "Effortlessly deposit and manage funds with transparent processes and real-time updates.",
     header: <Skeleton />,
     icon: <IconTableColumn className="h-4 w-4 text-neutral-500" />,
-    link: "/deposits",
+    link: "/deposit",
   },
   {
     title: "Withdrawal Options",
@@ -69,7 +69,7 @@ const items = [
       "Access your funds anytime, anywhere with convenient withdrawal options and instant processing.",
     header: <Skeleton />,
     icon: <IconArrowWaveRightUp className="h-4 w-4 text-neutral-500" />,
-    link: "/withdrawals",
+    link: "/withdraw",
   },
   {
     title: "Future Investments",

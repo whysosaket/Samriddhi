@@ -7,12 +7,12 @@ import { motion } from "framer-motion";
 
 const Home = () => {
   return (
-    <div className="my-4 flex">
+    <div className="my-4 flex md:flex-row flex-col">
       <motion.div
         initial={{ x: -200, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 1 }}
-        className="w-3/5"
+        className="md:w-3/5 w-full"
       >
         <div className="-mb-10 quando">
           <img className="w-[12rem] fill-white transparent" src={Stroke} />
@@ -20,7 +20,7 @@ const Home = () => {
             Hey!
           </h1>
         </div>
-        <div className="text-[5rem] ml-10 quando">
+        <div className="md:text-[5rem] text-[2rem] ml-10 quando">
           <motion.h1
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -48,7 +48,7 @@ const Home = () => {
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0 }}
-          className="w-full flex mt-12 ml-10"
+          className="w-full flex mt-12 ml-10 overflow-hidden"
         >
           <div className="w-1/3 flex align-middle">
             <h1 className="text-5xl my-auto">3</h1>

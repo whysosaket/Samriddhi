@@ -10,7 +10,7 @@ const JoinFund = () => {
   let id = location.pathname.split("/")[2];
 
   const { joinFund } = useContext(FundContext);
-  const {loading, setLoading, toastMessage} = useContext(GlobalContext);
+  const {setLoading, toastMessage} = useContext(GlobalContext);
 
   useEffect(() => {
     if (id) {

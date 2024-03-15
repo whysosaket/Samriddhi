@@ -1,4 +1,4 @@
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useContext, useRef } from "react";
 import { GiSesame } from "react-icons/gi";
 import Tick from "@/assets/tick.svg";
 import { motion } from "framer-motion";
@@ -24,23 +24,14 @@ const month = monthNames[new Date().getMonth()];
 const day = new Date().getDate();
 const isPhone = window.innerWidth < 768;
 
-const Deposit = () => {
+const Withdraw = () => {
   const [isSuccess, setIsSuccess] = useState(false);
-  const [funds, setFunds] = useState([]);
   const [amount, setAmount] = useState(0);
   const {toastMessage, isAuthenticated} = useContext(AuthContext);
-  const {deposit, getFunds} = useContext(FundContext);
+  const {withdraw} = useContext(FundContext);
 
   const amountRef = useRef<HTMLInputElement>(null);
   const fundRef = useRef<HTMLSelectElement>(null);
-
-  useEffect(() => {
-    const fetchFunds = async () => {
-      const funds = await getFunds();
-      setFunds(funds);
-    };
-    fetchFunds();
-  }, []);
 
   const handleClick = async () => {
     if(!isAuthenticated){
@@ -55,15 +46,15 @@ const Deposit = () => {
     }
 
     if(fund==""){
-        const am = await deposit(parseInt(amount));
+        const am = await withdraw(parseInt(amount));
+        if(!am){
+            return;
+        }
         setAmount(am);
         setIsSuccess(true);
         return;
     }else{
-        const am = await deposit(parseInt(amount), fund);
-        setAmount(am);
-        setIsSuccess(true);
-        return;
+        toastMessage("Please select your account to continue!", "danger");
     }
   };
 
@@ -143,10 +134,10 @@ const Deposit = () => {
                     </div>
                 {/* Card name */}
                 <h3 className="text-xl font-bold text-white mb-1">
-                  Deposit Money
+                  Withdraw Money
                 </h3>
                 <div className="text-sm font-medium text-gray-400">
-                  One tap deposit
+                  One tap withdraw
                 </div>
               </header>
               {/* Card body */}
@@ -173,21 +164,13 @@ const Deposit = () => {
                       className="text-sm text-white bg-white/10 rounded-l leading-5 py-2 px-3 placeholder-gray-400 w-full border border-transparent focus:border-orange-300 focus:ring-0"
                       >
                         <option value="">Self Account</option>
-                        {
-                            funds.map((fund, index) => {
-                                return (
-                                    // @ts-ignore
-                                    <option key={index} value={fund._id}>{fund.name}</option>
-                                )
-                            })
-                        }
                         </select>                  
                     </div>
                     <button
                       onClick={handleClick}
                       className="font-semibold text-sm inline-flex items-center justify-center px-3 py-2 border border-transparent rounded leading-5 shadow transition duration-150 ease-in-out w-full bg-orange-500 hover:bg-orange-600 text-white focus:outline-none focus-visible:ring-2"
                     >
-                      Deposit
+                      Withdraw
                     </button>
                   </div>
                 </div>
@@ -209,11 +192,11 @@ const Deposit = () => {
                     Success!
                   </h1>
                   <div className="text-sm font-medium text-gray-400">
-                    Your money has been depositted successfully.
+                    Your money has been withdrawn successfully.
                   </div>
                   <div className="">
                   <button onClick={reset} className="reset-button text-sm px-8 py-2 rounded-md my-2 text-white font-semibold bg-orange-500 hover:bg-orange-700">
-                    Deposit again
+                    Withdraw again
                   </button>
                   </div>
                 </motion.div>
@@ -243,4 +226,4 @@ const Deposit = () => {
   );
 };
 
-export default Deposit;
+export default Withdraw;

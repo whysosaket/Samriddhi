@@ -16,9 +16,10 @@ import Services from "@/pages/Services";
 import Funds from "@/pages/Fund/Funds";
 import CreateFund from "@/pages/Fund/CreateFund";
 import Loading from "@/components/Loading";
-import JoinFund from "./pages/Fund/JoinFund";
-import { FundState } from "./context/FundContext";
-import Deposit from "./pages/Banking/Deposit";
+import JoinFund from "@/pages/Fund/JoinFund";
+import { FundState } from "@/context/FundContext";
+import Deposit from "@/pages/Banking/Deposit";
+import Withdraw from "@/pages/Banking/Withdraw";
 
 function App() {
   return (
@@ -39,7 +40,7 @@ function App() {
         <Loading />
         <AuthState>
           <FundState>
-          <div className="py-6 px-12">
+          <div className="py-6 md;px-12 px-4">
             <Router>
               <Navbar />
               <Routes>
@@ -55,6 +56,7 @@ function App() {
 
                 {/* Banking */}
                 <Route path="/deposit" element={<Deposit />} />
+                <Route path="/withdraw" element={<Withdraw />} />
 
                 <Route path="*" element={<_404 />} />
               </Routes>

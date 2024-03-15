@@ -132,5 +132,21 @@ const getFundQR = async (req: CustomRequest, res: Response) => {
   }
 }
 
+const getFundInfo = async (req: CustomRequest, res: Response) => {
+  const { fundId } = req.body;
+  let success = false;
+  try {
+    const fund = await
+      Fund.findById(fundId).populate("members", "name email balance");
+    if (!fund) {
+      return res.status(400).json({ success, error: "Fund not found" });
+    }
+    success = true;
+    return res.json({ success, fund });
+  } catch (err) {
+    return res.status(500).json({ success, error: "Internal Server Error" });
+  }
+}
 
-export { createFund, joinFund, getMyFunds, getFundQR };
+
+export { createFund, joinFund, getMyFunds, getFundQR, getFundInfo };

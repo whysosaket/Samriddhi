@@ -159,9 +159,33 @@ const FundState = (props: any) => {
     }
   }
 
+  const getFund = async (fundId: string) => {
+    try {
+      const response = await fetch(`${url}/api/fund/getinfo`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token") || ""
+        },
+        body: JSON.stringify({ fundId }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        return data.fund;
+      } else {
+        toastMessage(data.error, "error");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      toastMessage("Something went wrong!", "error");
+    }
+  }
+
 
   return (
-    <FundContext.Provider value={{ toastMessage, createFund, joinFund, getFunds,getFundQR, deposit, withdraw }}>
+    <FundContext.Provider value={{ toastMessage, createFund, joinFund, getFunds,getFundQR, deposit, withdraw, getFund }}>
       {props.children}
     </FundContext.Provider>
   );

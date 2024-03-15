@@ -64,7 +64,7 @@ const LoanState = (props: any) => {
 
   const getFundLoans = async (fundId: string) => {
     try {
-      const response = await fetch(`${url}/api/loan/getfund}`, {
+      const response = await fetch(`${url}/api/loan/getfund`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -24,6 +24,7 @@ import Loans from "./pages/Loans";
 import RequestLoan from "./pages/Loan/RequestLoan";
 import { LoanState } from "./context/LoanContext";
 import Success from "./pages/Success";
+import Fund from "./pages/Fund/Fund";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
                 <Route path="/funds" element={<Funds />} />
                 <Route path="/createfund" element={<CreateFund />} />
                 <Route path="/joinfund/:id" element={<JoinFund />} />
+                <Route path="/fund/:id" element={<Fund />} />
 
                 {/* Banking */}
                 <Route path="/deposit" element={<Deposit />} />

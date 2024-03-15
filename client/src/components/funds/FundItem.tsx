@@ -3,6 +3,7 @@ import { IoQrCodeOutline } from "react-icons/io5";
 import JoinFundQR from "./JoinFundQR";
 import { useContext } from "react";
 import FundContext from "@/context/FundContext";
+import { useNavigate } from "react-router-dom";
 
 interface FundItemProps {
   fund: any;
@@ -19,6 +20,12 @@ const FundItem: React.FunctionComponent<FundItemProps> = ({ fund }) => {
     setImgurl(imgurl);
     setShowQR(true);
   };
+
+  const navigate = useNavigate();
+
+  const handleGotoFund = () => {
+    navigate(`/fund/${fund._id}`);
+  }
 
   return (
     <>
@@ -49,7 +56,7 @@ const FundItem: React.FunctionComponent<FundItemProps> = ({ fund }) => {
               onClick={handleQR}
               className="text-white my-auto text-3xl hover:text-orange-300 cursor-pointer"
             />
-            <button className="bg-primary hover:bg-orange-700 text-black p-2 rounded-lg mt-2">
+            <button onClick={handleGotoFund} className="bg-primary hover:bg-orange-700 text-black p-2 rounded-lg mt-2">
               View Fund
             </button>
           </div>

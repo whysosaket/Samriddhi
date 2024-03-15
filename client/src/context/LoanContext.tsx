@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext } from "react";
 const LoanContext = createContext<any>({});
 import { toast } from "react-toastify";
 let url = import.meta.env.VITE_URL;

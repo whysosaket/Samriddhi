@@ -2,14 +2,13 @@ import React, {useContext, useRef, useState, useEffect } from "react";
 import { Label } from "@/ui/Label";
 import { Input } from "@/ui/Input";
 import { cn } from "@/utils/cn";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { appName } from "@/data";
-import AuthContext from "@/context/AuthContext";
+// import AuthContext from "@/context/AuthContext";
 import FundContext from "@/context/FundContext";
 
 export function LoanFormDemo() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [funds, setFunds] = useState([]);
   const { getFunds} = useContext(FundContext);
@@ -65,7 +64,7 @@ export function LoanFormDemo() {
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Duration</Label>
             <Input
-              ref={amountRef}
+              ref={durationRef}
               id="email"
               placeholder="5 Months"
               type="number"

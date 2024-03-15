@@ -18,6 +18,7 @@ import CreateFund from "@/pages/Fund/CreateFund";
 import Loading from "@/components/Loading";
 import JoinFund from "./pages/Fund/JoinFund";
 import { FundState } from "./context/FundContext";
+import Deposit from "./pages/Banking/Deposit";
 
 function App() {
   return (
@@ -51,6 +52,9 @@ function App() {
                 <Route path="/funds" element={<Funds />} />
                 <Route path="/createfund" element={<CreateFund />} />
                 <Route path="/joinfund/:id" element={<JoinFund />} />
+
+                {/* Banking */}
+                <Route path="/deposit" element={<Deposit />} />
 
                 <Route path="*" element={<_404 />} />
               </Routes>

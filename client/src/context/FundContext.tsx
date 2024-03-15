@@ -109,8 +109,59 @@ const FundState = (props: any) => {
     }
   }
 
+  const deposit = async (amount: number, fundId: string) => {
+    try {
+      const response = await fetch(`${url}/api/user/deposit`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token") || ""
+        },
+        body: JSON.stringify({ amount, fundId }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        toastMessage(data.info, "success");
+        return data.balance;
+      } else {
+        toastMessage(data.error, "error");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      toastMessage("Something went wrong!", "error");
+    }
+  }
+
+  const withdraw = async (amount: number, fundId: string) => {
+    try {
+      const response = await fetch(`${url}/api/user/withdraw`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token") || ""
+        },
+        body: JSON.stringify({ amount, fundId }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        toastMessage(data.info, "success");
+        return data.balance;
+      } else {
+        toastMessage(data.error, "error");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      toastMessage("Something went wrong!", "error");
+    }
+  }
+
+
   return (
-    <FundContext.Provider value={{ toastMessage, createFund, joinFund, getFunds,getFundQR }}>
+    <FundContext.Provider value={{ toastMessage, createFund, joinFund, getFunds,getFundQR, deposit, withdraw }}>
       {props.children}
     </FundContext.Provider>
   );

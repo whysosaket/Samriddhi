@@ -22,6 +22,8 @@ import Deposit from "@/pages/Banking/Deposit";
 import Withdraw from "@/pages/Banking/Withdraw";
 import Loans from "./pages/Loans";
 import RequestLoan from "./pages/Loan/RequestLoan";
+import { LoanState } from "./context/LoanContext";
+import Success from "./pages/Success";
 
 function App() {
   return (
@@ -42,6 +44,7 @@ function App() {
         <Loading />
         <AuthState>
           <FundState>
+            <LoanState>
           <div className="py-6 md;px-12 px-4">
             <Router>
               <Navbar />
@@ -65,9 +68,11 @@ function App() {
                 <Route path="/getloan" element={<RequestLoan />} />
 
                 <Route path="*" element={<_404 />} />
+                <Route path="/success" element={<Success/>} />
               </Routes>
             </Router>
           </div>
+          </LoanState>
           </FundState>
         </AuthState>
       </GlobalState>

@@ -62,8 +62,83 @@ const LoanState = (props: any) => {
     }
   }
 
+  const getFundLoans = async (fundId: string) => {
+    try {
+      const response = await fetch(`${url}/api/loan/getfund}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token") || ""
+        },
+        body: JSON.stringify({ fundId }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        toastMessage(data.info, "success");
+        return data.loans;
+      } else {
+        toastMessage(data.error, "error");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      toastMessage("Something went wrong!", "error");
+    }
+  }
+
+  const createLoan = async (amount: number, duration: number, interest: number, fundId: String) => {
+    try {
+      const response = await fetch(`${url}/api/loan/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token") || ""
+        },
+        body: JSON.stringify({ amount, duration, interest, fundId }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        toastMessage(data.info, "success");
+        return true;
+      } else {
+        toastMessage(data.error, "error");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      toastMessage("Something went wrong!", "error");
+    }
+  }
+
+  const approveLoan = async (loanId: string) => {
+    try {
+      const response = await fetch(`${url}/api/loan/approve`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token") || ""
+        },
+        body: JSON.stringify({ loanId }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        toastMessage(data.info, "success");
+        return true;
+      } else {
+        toastMessage(data.error, "error");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      toastMessage("Something went wrong!", "error");
+    }
+  }
+
   return (
-    <LoanContext.Provider value={{ toastMessage, getInterest, getLoans  }}>
+    <LoanContext.Provider value={{ toastMessage, getInterest, getLoans, getFundLoans,createLoan, approveLoan  }}>
       {props.children}
     </LoanContext.Provider>
   );

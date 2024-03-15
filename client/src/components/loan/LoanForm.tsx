@@ -2,21 +2,26 @@ import React, {useContext, useRef, useState, useEffect } from "react";
 import { Label } from "@/ui/Label";
 import { Input } from "@/ui/Input";
 import { cn } from "@/utils/cn";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { appName } from "@/data";
 // import AuthContext from "@/context/AuthContext";
 import FundContext from "@/context/FundContext";
+import LoanContext from "@/context/LoanContext";
 
 export function LoanFormDemo() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [funds, setFunds] = useState([]);
+  const [interestAmount, setInterestAmount] = useState(0);
+  const [isVisiable, setIsVisiable] = useState(false);
   const { getFunds} = useContext(FundContext);
 
   const amountRef = useRef<HTMLInputElement>(null);
   const interestRef = useRef<HTMLInputElement>(null);
   const durationRef = useRef<HTMLInputElement>(null);
   const fundRef = useRef<HTMLSelectElement>(null);
+
+  const {toastMessage,createLoan, getInterest} = useContext(LoanContext);
 
   useEffect(() => {
     const fetchFunds = async () => {
@@ -26,10 +31,42 @@ export function LoanFormDemo() {
     fetchFunds();
   }, []);
 
-  // const {requestLoan, getFunds} = useContext(FundContext);
+
+  const handleGetInfo = async () => {
+    const amount = amountRef.current?.value;
+    const interest = interestRef.current?.value;
+    const duration = durationRef.current?.value;
+
+    // check null vlaues
+    if(amount=="" || interest=="" || duration==""){
+      toastMessage("Please fill all the fields to continue!", "danger");
+      return;
+    }
+
+    // @ts-ignore
+    const interestAmount = await getInterest(parseInt(amount), parseInt(duration), parseInt(interest));
+    setInterestAmount(interestAmount);
+    setIsVisiable(true);
+  }
+ 
 
   const handleSubmit = async () => {
-    
+    const amount = amountRef.current?.value;
+    const interest = interestRef.current?.value;
+    const duration = durationRef.current?.value;
+    const fund = fundRef.current?.value;
+
+    // check null vlaues
+    if(amount=="" || interest=="" || duration==""){
+      toastMessage("Please fill all the fields to continue!", "danger");
+      return;
+    }
+
+    // @ts-ignore
+    const success = await createLoan(parseInt(amount), parseInt(duration), parseInt(interest), fund);
+    if (success) {
+      navigate("/success");
+    }
   };
   return (
     <div className="w-full px-16 my-auto">
@@ -44,11 +81,14 @@ export function LoanFormDemo() {
         </p>
         </div>
         <div>
-          <button className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-20 text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] hover:bg-slate-600">
+          <button onClick={handleGetInfo} className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-20 text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] hover:bg-slate-600">
             Get Info
           </button>
         </div>
         </div>
+        {isVisiable&&<h1 className="text-sm text-red-500">
+          You will have to pay a interest of ₹{interestAmount} in {durationRef.current?.value} months
+        </h1>}
       
 
         <div className="my-8">
@@ -88,7 +128,7 @@ export function LoanFormDemo() {
                 {
                   funds.map((fund) => (
                     // @ts-ignore
-                    <option key={fund.id} value={fund.id}>{fund.name}</option>
+                    <option key={fund.id} value={fund._id}>{fund.name}</option>
                   ))
                 }
               </select>

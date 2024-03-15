@@ -63,7 +63,7 @@ const createLoan = async (req: CustomRequest, res: Response) => {
       amount,
       interest,
       duration,
-      by: myuser._id,
+      user: myuser._id,
       status: "pending",
       fund,
     });
@@ -83,6 +83,7 @@ const createLoan = async (req: CustomRequest, res: Response) => {
     success = true;
     return res.json({ success, loan });
   } catch (err) {
+    console.log(err);
     return res.status(500).json({ success, error: "Internal Server Error" });
   }
 };
@@ -131,6 +132,24 @@ const approveLoan = async (req: CustomRequest, res: Response) => {
       return res.json({ success, loan });
     }
 
+    // process amount
+    // @ts-ignore
+    loan.fund.balance -= loan.amount;
+    // @ts-ignore
+    await loan.fund.save();
+
+    // update user balance
+    // @ts-ignore
+    myuser.balance += loan.amount;
+    await myuser.save();
+
+    // create notification for user
+    let notification = new Notifications({
+      message: `Your loan of ${loan.amount} has been approved`,
+      user: loan.user,
+    });
+
+
     success = true;
     return res.json({ success, loan });
   } catch (err) {
@@ -152,7 +171,7 @@ const getLoans = async (req: CustomRequest, res: Response) => {
       return res.status(401).json({ success, error: "Unauthorized" });
     }
 
-    let loans = await Loan.find({ by: myuser._id }).populate('fund');
+    let loans = await Loan.find({ user: myuser._id }).populate('fund');
     success = true;
     return res.json({ success, loans });
   } catch (err) {
@@ -163,6 +182,7 @@ const getLoans = async (req: CustomRequest, res: Response) => {
 const getFundLoans = async (req: CustomRequest, res: Response) => {
   let success = false;
   const user = req.user;
+  const { fundId } = req.body;
   try {
     // check if user is valid
     if (!user) {
@@ -174,13 +194,12 @@ const getFundLoans = async (req: CustomRequest, res: Response) => {
       return res.status(401).json({ success, error: "Unauthorized" });
     }
 
-    let fundId = req.params.id;
     let fund = await Fund.findById(fundId);
     if (!fund) {
       return res.status(400).json({ success, error: "Fund not found" });
     }
 
-    let loans = await Loan.find({ fund: fund._id }).populate('by');
+    let loans = await Loan.find({ fund: fund._id }).populate('user');
     success = true;
     return res.json({ success, loans });
   } catch (err) {

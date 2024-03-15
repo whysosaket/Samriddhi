@@ -63,11 +63,12 @@ const LoanState = (props: any) => {
   }
 
   return (
-    <LoanContext.Provider value={{ toastMessage, getInterest,  }}>
+    <LoanContext.Provider value={{ toastMessage, getInterest, getLoans  }}>
       {props.children}
     </LoanContext.Provider>
   );
 };
 
 export default LoanContext;
+
 export { LoanState };

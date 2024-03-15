@@ -48,7 +48,7 @@ const Home = () => {
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0 }}
-          className="w-full flex mt-12 ml-10 overflow-hidden"
+          className="w-full flex mt-12 ml-10 overflow-hidden "
         >
           <div className="w-1/3 flex align-middle">
             <h1 className="text-5xl my-auto">3</h1>

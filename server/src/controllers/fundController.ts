@@ -5,6 +5,8 @@ import { Request, Response } from "express";
 
 import User from "../models/User";
 import Fund from "../models/Fund";
+import Notifications from "../models/Notifications";
+import Loan from "../models/Loan";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -128,5 +130,6 @@ const getFundQR = async (req: CustomRequest, res: Response) => {
     return res.status(500).json({ success, error: "Internal Server Error" });
   }
 }
+
 
 export { createFund, joinFund, getMyFunds, getFundQR };

@@ -19,7 +19,7 @@ console.log(window.innerWidth)
       initial={{ y: -200, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 1 }}
-      className={`flex quando justify-between ${mobileMenuOpen && "mb-60"}`}
+      className={`flex quando justify-between ${mobileMenuOpen && isMobile && "mb-60"}`}
     >
       <Link to="/" className="flex align-middle ">
         <GiSesame size={30} className="text-primary my-auto" />

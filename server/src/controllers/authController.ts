@@ -21,16 +21,16 @@ const createUser = async (req: Request, res: Response) => {
   let success = false;
 
   // Saving req data into a variable
-  let data = req.body;
+  let {name, email, phone, password} = req.body;
 
   try {
     // Checking if email is valid
-    if (!isEmailValid(data.email)) {
+    if (!isEmailValid(email)) {
       return res.json({ success, error: "Please, enter a valid email" });
     }
 
     // Checking if user already exists
-    let user = await User.findOne({ email: data.email });
+    let user = await User.findOne({ email: email });
     if (user) {
       return res.status(400).json({
         success,
@@ -40,17 +40,17 @@ const createUser = async (req: Request, res: Response) => {
 
     // Using bcrypt to generate a secured password
     // Crating a salt from bcrypt
-    const securedPassword = await bcrypt.hash(data.password.toString(), 10);
+    const securedPassword = await bcrypt.hash(password.toString(), 10);
 
     // Converting the name to title case
-    data.name = toTitleCase(data.name);
+    name = toTitleCase(name);
 
     // Creating the user
     user = await User.create({
-      name: data.name,
+      name: name,
       password: securedPassword,
-      email: data.email,
-      languages: data.languages,
+      email: email,
+      phone: phone,
     });
 
     success = true;

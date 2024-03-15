@@ -3,7 +3,7 @@ import { Label } from "@/ui/Label";
 import { Input } from "@/ui/Input";
 import { cn } from "@/utils/cn";
 import { Link } from "react-router-dom";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { appName } from "@/data";
 import AuthContext from "@/context/AuthContext";

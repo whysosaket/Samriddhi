@@ -12,6 +12,7 @@ import DynamicBackground from "@/components/DynamicBackground";
 import Signup from "@/pages/Signup";
 import { GlobalState } from "@/context/GlobalContext";
 import { AuthState } from "@/context/AuthContext";
+import Services from "./pages/Services";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
+                <Route path="/services" element={<Services />} />
                 <Route path="*" element={<_404 />} />
               </Routes>
             </Router>

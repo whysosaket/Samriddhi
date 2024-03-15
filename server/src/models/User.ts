@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
     password: {type: String, required: true},
     phone: {type: String, required: true},
     balance: {type: Number, required: true, default: 0},
-    fund: {type: mongoose.Schema.Types.ObjectId, ref: 'fund'}
+    fund: {type: mongoose.Schema.Types.ObjectId, ref: 'fund'},
+    annualIncome: {type: Number, required: true},
 });
 
 export default mongoose.model('user', userSchema);

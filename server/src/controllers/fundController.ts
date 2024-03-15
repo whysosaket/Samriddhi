@@ -45,7 +45,7 @@ const createFund = async (req: CustomRequest, res: Response) => {
 
     await fund.save();
     success = true;
-    const uri = `http://localhost:5173/joinfund/${fund._id}`;
+    const uri = `http://172.20.44.180:5173/joinfund/${fund._id}`;
     QRCode.toDataURL(uri, function (err, imgurl) {
       return res.json({ success: true, imgurl, uri });
     });
@@ -69,7 +69,7 @@ const joinFund = async (req: CustomRequest, res: Response) => {
     }
 
     // check if fund is valid
-    let fund = await Fund.findById(fundId);
+    let fund = await Fund.findOne({ _id: fundId });
     if (!fund) {
       return res.status(400).json({ success, error: "Fund not found" });
     }
@@ -94,4 +94,39 @@ const joinFund = async (req: CustomRequest, res: Response) => {
   }
 };
 
-export { createFund, joinFund };
+const getMyFunds = async (req: CustomRequest, res: Response) => {
+  const user = req.user;
+  let success = false;
+  try {
+    // check if user is valid
+    if (!user) {
+      return res.status(401).json({ success, error: "Unauthorized" });
+    }
+    const myuser = await User.findById(user.id);
+
+    if (!myuser) {
+      return res.status(401).json({ success, error: "Unauthorized" });
+    }
+
+    const funds = await Fund.find({ members: myuser._id });
+    success = true;
+    return res.json({ success, funds });
+  } catch (err) {
+    return res.status(500).json({ success, error: "Internal Server Error" });
+  }
+}
+
+const getFundQR = async (req: CustomRequest, res: Response) => {
+  const { fundId } = req.body;
+  let success = false;
+  try {
+    const uri = `http://172.20.44.180:5173/joinfund/${fundId}`;
+    QRCode.toDataURL(uri, function (err, imgurl) {
+      return res.json({ success: true, imgurl, uri });
+    });
+  } catch (err) {
+    return res.status(500).json({ success, error: "Internal Server Error" });
+  }
+}
+
+export { createFund, joinFund, getMyFunds, getFundQR };

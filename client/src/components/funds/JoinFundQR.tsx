@@ -3,9 +3,10 @@ import React from 'react';
 
 interface JoinFundQRProps {
     imgurl: string;
+    setShowQR?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const JoinFundQR:React.FunctionComponent<JoinFundQRProps> = ({imgurl}) => {
+const JoinFundQR:React.FunctionComponent<JoinFundQRProps> = ({imgurl, setShowQR}) => {
   return (
     <motion.div
     initial={{ opacity: 0, y: -10 }}
@@ -21,7 +22,14 @@ const JoinFundQR:React.FunctionComponent<JoinFundQRProps> = ({imgurl}) => {
         <p className="text-sm max-w-sm mt-2 dark:text-neutral-300 text-center">
           to join the fund.
         </p>
-        
+        {setShowQR&&<div className="py-10 text-center">
+            <button
+              onClick={() => setShowQR && setShowQR(false)}
+              className="px-12 bg-orange-600 hover:bg-orange-500 text-white font-semibold py-3"
+            >
+              Close
+            </button>
+        </div>}
     </motion.div>
   )
 }

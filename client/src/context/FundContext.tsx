@@ -43,6 +43,7 @@ const FundState = (props: any) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token") || ""
         },
         body: JSON.stringify({ fundId }),
       });
@@ -61,8 +62,55 @@ const FundState = (props: any) => {
     }
   };
 
+  const getFunds = async () => {
+    try {
+      const response = await fetch(`${url}/api/fund/myfunds`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token") || ""
+        },
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        return data.funds;
+      } else {
+        toastMessage(data.error, "error");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      toastMessage("Something went wrong!", "error");
+    }
+  }
+
+  const getFundQR = async (fundId: string) => {
+    try {
+      const response = await fetch(`${url}/api/fund/getqr`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("auth-token") || ""
+        },
+        body: JSON.stringify({ fundId }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        return data.imgurl;
+      } else {
+        toastMessage(data.error, "error");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      toastMessage("Something went wrong!", "error");
+    }
+  }
+
   return (
-    <FundContext.Provider value={{ toastMessage, createFund, joinFund }}>
+    <FundContext.Provider value={{ toastMessage, createFund, joinFund, getFunds,getFundQR }}>
       {props.children}
     </FundContext.Provider>
   );

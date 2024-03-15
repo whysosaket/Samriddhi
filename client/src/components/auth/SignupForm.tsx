@@ -18,13 +18,15 @@ export function SignupFormDemo() {
   const passwordRef = useRef<HTMLInputElement>(null);
   const fullnameRef = useRef<HTMLInputElement>(null);
   const phoneNumberRef = useRef<HTMLInputElement>(null);
+  const annualIncomeRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async () => {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
     const fullname = fullnameRef.current?.value;
     const phoneNumber = phoneNumberRef.current?.value;
-    const success = await signup(fullname, email, phoneNumber, password);
+    const annualIncome = annualIncomeRef.current?.value;
+    const success = await signup(fullname, email, phoneNumber, password, annualIncome);
     if (success) {
       navigate("/login");
     }
@@ -79,7 +81,17 @@ export function SignupFormDemo() {
               type="password"
             />
           </LabelInputContainer>
+      
           </div>
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="email">Annual Income</Label>
+            <Input
+              ref={annualIncomeRef}
+              id="email"
+              placeholder="10000"
+              type="number"
+            />
+          </LabelInputContainer>
           <button
             onClick={handleSubmit}
             className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"

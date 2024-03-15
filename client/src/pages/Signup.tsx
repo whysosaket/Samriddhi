@@ -11,7 +11,7 @@ const Signup = () => {
   return (
     <motion.div
       {...animationProps}
-      className="pt-20 max-h-screen overflow-hidden flex"
+      className="pt-12 max-h-screen overflow-hidden flex"
     >
       <div className="flex justify-center align-middle w-1/2 hover:opacity-70">
         <Atropos

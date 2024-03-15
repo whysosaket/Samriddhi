@@ -1,15 +1,24 @@
 import { motion } from "framer-motion";
 import FundItem from "@/components/funds/FundItem";
-import { useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 import { MdLibraryAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
+import FundContext from "@/context/FundContext";
 
-let funds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const Funds = () => {
 
+    const [funds, setFunds] = useState([]);
+    const { getFunds } = useContext(FundContext);
+
+
     useEffect(() => {
         window.scrollTo(0, 0);
+        const fetchFunds = async () => {
+            const funds = await getFunds();
+            setFunds(funds);
+        };
+        fetchFunds();
     }, []);
 
   return (

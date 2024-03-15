@@ -45,14 +45,14 @@ const AuthState = (props: any) => {
     }
   };
 
-  const signup = async (name: string, email: string, phone: string, password: string) => {
+  const signup = async (name: string, email: string, phone: string, password: string, annualIncome: number) => {
     try {
       const response = await fetch(`${url}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, phone, password }),
+        body: JSON.stringify({ name, email, phone, password, annualIncome }),
       });
 
       const data = await response.json();

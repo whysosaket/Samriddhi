@@ -7,17 +7,31 @@ import { appName } from "@/data";
 import GlobalContext from "@/context/GlobalContext";
 import { motion } from "framer-motion";
 import JoinFundQR from "./JoinFundQR";
+import FundContext from "@/context/FundContext";
 
 const CreateFundForm = () => {
   const fundNameRef = useRef<HTMLInputElement>(null);
   const generalInterestRef = useRef<HTMLInputElement>(null);
   const {setLoading, toastMessage} = useContext(GlobalContext);
+  const [imageurl, setImageurl] = useState("");
   const [created, setCreated] = useState(false);
+  const {createFund} = useContext(FundContext);
 
   const handleSubmit = async () => {
     const fundName = fundNameRef.current?.value;
     const generalInterest = generalInterestRef.current?.value;
+
+    // checking if the fields are empty
+    if (!fundName || !generalInterest) {
+      toastMessage("Please fill all the fields", "error");
+      return;
+    }
     setLoading(true);
+    const response = await createFund(fundName, generalInterest);
+   if(response){
+        setImageurl(response);
+   }
+
     setTimeout(() => {
         setLoading(false);
         toastMessage("Fund created successfully", "success");
@@ -25,7 +39,7 @@ const CreateFundForm = () => {
         }, 2000);
   };
   return (
-    <>{created?<JoinFundQR />:
+    <>{created?<JoinFundQR imgurl={imageurl} />:
     <motion.div
     initial={{ opacity: 0, x: -100 }}
     animate={{ opacity: 1, x: 0 }}

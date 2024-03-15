@@ -13,9 +13,11 @@ import Signup from "@/pages/Signup";
 import { GlobalState } from "@/context/GlobalContext";
 import { AuthState } from "@/context/AuthContext";
 import Services from "@/pages/Services";
-import Funds from "@/pages/Funds";
-import CreateFund from "@/pages/CreateFund";
+import Funds from "@/pages/Fund/Funds";
+import CreateFund from "@/pages/Fund/CreateFund";
 import Loading from "@/components/Loading";
+import JoinFund from "./pages/Fund/JoinFund";
+import { FundState } from "./context/FundContext";
 
 function App() {
   return (
@@ -35,6 +37,7 @@ function App() {
       <GlobalState>
         <Loading />
         <AuthState>
+          <FundState>
           <div className="py-6 px-12">
             <Router>
               <Navbar />
@@ -47,11 +50,13 @@ function App() {
                 {/* Services */}
                 <Route path="/funds" element={<Funds />} />
                 <Route path="/createfund" element={<CreateFund />} />
+                <Route path="/joinfund/:id" element={<JoinFund />} />
 
                 <Route path="*" element={<_404 />} />
               </Routes>
             </Router>
           </div>
+          </FundState>
         </AuthState>
       </GlobalState>
     </>

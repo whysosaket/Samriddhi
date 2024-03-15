@@ -11,7 +11,7 @@ const Home = () => {
       <motion.div
         initial={{ x: -200, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1.2 }}
+        transition={{ duration: 1 }}
         className="w-3/5"
       >
         <div className="-mb-10 quando">
@@ -24,7 +24,7 @@ const Home = () => {
           <motion.h1
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0 }}
+            transition={{ duration: 1, delay: 0 }}
           >
             Let's start
             <BsArrowRight className="text-secondary inline ml-6" />
@@ -32,14 +32,14 @@ const Home = () => {
           <motion.h1
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.1 }}
+            transition={{ duration: 1, delay: 0.1 }}
           >
             something big
           </motion.h1>
           <motion.h1
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1.2, delay: 0.2 }}
+            transition={{ duration: 1, delay: 0.2 }}
           >
             together
           </motion.h1>
@@ -47,7 +47,7 @@ const Home = () => {
         <motion.div
           initial={{ y: 200, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.2, delay: 0 }}
+          transition={{ duration: 1, delay: 0 }}
           className="w-full flex mt-12 ml-10"
         >
           <div className="w-1/3 flex align-middle">
@@ -72,7 +72,7 @@ const Home = () => {
           <motion.div
           initial={{ x: 500, opacity: 0 }}
           animate={{ x: 0, opacity: 1, rotate: [40, 8]}}
-          transition={{ duration: 1.2, delay: 0 }}
+          transition={{ duration: 1, delay: 0 }}
           className="absolute rotate-[8deg] ml-10">
             <Card1 />
           </motion.div>
@@ -81,7 +81,7 @@ const Home = () => {
           <motion.div
           initial={{ y: 500, opacity: 0 }}
           animate={{ y: 0, opacity: 1, rotate: [-40, -8] }}
-          transition={{ duration: 1.2, delay: 0 }}
+          transition={{ duration: 1, delay: 0 }}
           className="absolute rotate-[-6deg] ml-10">
             <Card2 />
           </motion.div>

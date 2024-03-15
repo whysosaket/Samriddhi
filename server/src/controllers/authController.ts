@@ -38,6 +38,20 @@ const createUser = async (req: Request, res: Response) => {
       });
     }
 
+    // checking phone number
+    if (phone.length !== 10) {
+      return res.json({ success, error: "Please, enter a valid phone number" });
+    }
+
+    // unique phone number
+    user = await User.findOne({ phone });
+    if (user) {
+      return res.status(400).json({
+        success,
+        error: "Sorry, Phone Number is already registered!",
+      });
+    }
+
     // Using bcrypt to generate a secured password
     // Crating a salt from bcrypt
     const securedPassword = await bcrypt.hash(password.toString(), 10);

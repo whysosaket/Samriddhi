@@ -1,16 +1,18 @@
 import React from "react";
-import { Label } from "../../ui/Label";
-import { Input } from "../../ui/Input";
-import { cn } from "../../utils/cn";
+import { Label } from "@/ui/Label";
+import { Input } from "@/ui/Input";
+import { cn } from "@/utils/cn";
 import { Link } from "react-router-dom";
 import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { appName } from "../../data";
-import {motion} from 'framer-motion'
+import { appName } from "@/data";
+import AuthContext from "@/context/AuthContext";
 
 export function SignupFormDemo() {
 
   const navigate = useNavigate();
+
+  const {signup} = useContext(AuthContext);
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -22,7 +24,10 @@ export function SignupFormDemo() {
     const password = passwordRef.current?.value;
     const fullname = fullnameRef.current?.value;
     const phoneNumber = phoneNumberRef.current?.value;
-    console.log(email, password, fullname, phoneNumber);
+    const success = await signup(fullname, email, phoneNumber, password);
+    if (success) {
+      navigate("/login");
+    }
   };
   return (
     <div className="w-full px-16 my-auto">

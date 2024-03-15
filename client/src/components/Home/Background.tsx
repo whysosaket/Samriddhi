@@ -10,7 +10,7 @@ const Background = () => {
       <motion.div
         initial={{ y: -200, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1.2 }}
+        transition={{ duration: 1 }}
         className="flex"
       >
         <SiStardock size={200} className="text-primary my-auto" />
@@ -19,7 +19,7 @@ const Background = () => {
       <motion.div
           initial={{y: 200, opacity: 0}}
           animate={{y: 0, opacity: 1}}
-          transition={{duration: 1.2}}
+          transition={{duration: 1}}
       className="absolute bottom-20 right-20 flex justify-between w-full">
         <SiStarbucks size={60} className="text-secondary my-auto ml-40 mb-10" />
         <SiStartrek size={90} className="text-primary my-auto mr-10" />

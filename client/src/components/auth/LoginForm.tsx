@@ -1,14 +1,16 @@
-import React from "react";
+import React, {useContext, useRef } from "react";
 import { Label } from "@/ui/Label";
 import { Input } from "@/ui/Input";
 import { cn } from "@/utils/cn";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { appName } from "@/data";
+import AuthContext from "@/context/AuthContext";
 
 export function LoginFormDemo() {
   const navigate = useNavigate();
+
+  const {login} = useContext(AuthContext);
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -16,8 +18,11 @@ export function LoginFormDemo() {
   const handleSubmit = async () => {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
-
-    console.log(email, password);
+    
+    const success = await login(email, password);
+    if (success) {
+      navigate("/");
+    }
   };
   return (
     <div className="w-full px-16 my-auto">

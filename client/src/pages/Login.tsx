@@ -12,7 +12,7 @@ const Login = () => {
   return (
     <motion.div
       {...animationProps}
-      className="pt-16 max-h-screen overflow-hidden flex align-middle justify-center"
+      className="pt-24 max-h-screen overflow-hidden flex align-middle justify-center"
     >
       <div className="flex justify-center align-middle">
         <LoginFormDemo />

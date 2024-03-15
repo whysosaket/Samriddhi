@@ -20,6 +20,8 @@ import JoinFund from "@/pages/Fund/JoinFund";
 import { FundState } from "@/context/FundContext";
 import Deposit from "@/pages/Banking/Deposit";
 import Withdraw from "@/pages/Banking/Withdraw";
+import Loans from "./pages/Loans";
+import RequestLoan from "./pages/Loan/RequestLoan";
 
 function App() {
   return (
@@ -57,6 +59,10 @@ function App() {
                 {/* Banking */}
                 <Route path="/deposit" element={<Deposit />} />
                 <Route path="/withdraw" element={<Withdraw />} />
+
+                {/* Loans */}
+                <Route path="/loans" element={<Loans />} />
+                <Route path="/getloan" element={<RequestLoan />} />
 
                 <Route path="*" element={<_404 />} />
               </Routes>

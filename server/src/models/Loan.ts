@@ -8,6 +8,7 @@ const loanSchema = new mongoose.Schema({
     created: {type: Date, default: Date.now},
     status: {type: String, required: true, default: 'pending'},
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'user'},
+    approvedBy: {type: Number, required: true, default: 0},
 });
 
 export default mongoose.model('loan', loanSchema);

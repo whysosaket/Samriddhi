@@ -1,56 +1,61 @@
-import React, {useContext, useRef } from "react";
+import React from "react";
 import { Label } from "@/ui/Label";
 import { Input } from "@/ui/Input";
 import { cn } from "@/utils/cn";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useContext, useRef, useState } from "react";
 import { appName } from "@/data";
-import AuthContext from "@/context/AuthContext";
+import GlobalContext from "@/context/GlobalContext";
+import { motion } from "framer-motion";
+import JoinFundQR from "./JoinFundQR";
 
-export function LoginFormDemo() {
-  const navigate = useNavigate();
-
-  const {login} = useContext(AuthContext);
-
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+const CreateFundForm = () => {
+  const fundNameRef = useRef<HTMLInputElement>(null);
+  const generalInterestRef = useRef<HTMLInputElement>(null);
+  const {setLoading, toastMessage} = useContext(GlobalContext);
+  const [created, setCreated] = useState(false);
 
   const handleSubmit = async () => {
-    const email = emailRef.current?.value;
-    const password = passwordRef.current?.value;
-    
-    const success = await login(email, password);
-    if (success) {
-      navigate("/");
-    }
+    const fundName = fundNameRef.current?.value;
+    const generalInterest = generalInterestRef.current?.value;
+    setLoading(true);
+    setTimeout(() => {
+        setLoading(false);
+        toastMessage("Fund created successfully", "success");
+        setCreated(true);
+        }, 2000);
   };
   return (
-    <div className="w-full px-16 my-auto">
+    <>{created?<JoinFundQR />:
+    <motion.div
+    initial={{ opacity: 0, x: -100 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6 }}
+    className="w-2/3 px-16 my-auto">
       <div className="w-full rounded-none md:rounded-2xl p-10 shadow-input bg-black/50">
         <h2 className="font-bold text-xl text-neutral-200">
-          Welcome to {appName}
+          {created?"Join":"Create"} a {appName} Fund
         </h2>
         <p className="text-sm max-w-sm mt-2 dark:text-neutral-300">
-          Login to {appName}. Continue your earning journey.
+          Create Fund. Start earning now.
         </p>
 
         <div className="my-8">
           <LabelInputContainer className="mb-4">
-            <Label htmlFor="email">Email Address</Label>
+            <Label htmlFor="fundname">Fund Name</Label>
             <Input
-              ref={emailRef}
-              id="email"
-              placeholder="projectmayhem@fc.com"
-              type="email"
+              ref={fundNameRef}
+              id="fundname"
+              placeholder="Varanasi Fund 5"
+              type="text"
             />
           </LabelInputContainer>
           <LabelInputContainer className="mb-4">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">General Interest</Label>
             <Input
-              ref={passwordRef}
+              ref={generalInterestRef}
               id="password"
-              placeholder="••••••••"
-              type="password"
+              placeholder="2.5"
+              type="number"
             />
           </LabelInputContainer>
 
@@ -58,33 +63,15 @@ export function LoginFormDemo() {
             onClick={handleSubmit}
             className="bg-gradient-to-br relative group/btn from-black dark:from-zinc-900 dark:to-zinc-900 to-neutral-600 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
           >
-            Login &rarr;
+            Create Fund &rarr;
             <BottomGradient />
           </button>
-
-          <p className="text-xs text-neutral-300 mt-4">
-            By signing up, you agree to our{" "}
-            <a href="#" className="text-orange-500">
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a href="#" className="text-orange-500">
-              Privacy Policy
-            </a>
-            .
-          </p>
-
-          <p className="text-xs text-neutral-300 mt-4">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-orange-500">
-              Signup
-            </Link>
-          </p>
         </div>
       </div>
-    </div>
+    </motion.div>}
+    </>
   );
-}
+};
 
 const BottomGradient = () => {
   return (
@@ -108,3 +95,5 @@ const LabelInputContainer = ({
     </div>
   );
 };
+
+export default CreateFundForm;

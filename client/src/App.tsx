@@ -14,6 +14,8 @@ import { GlobalState } from "@/context/GlobalContext";
 import { AuthState } from "@/context/AuthContext";
 import Services from "@/pages/Services";
 import Funds from "@/pages/Funds";
+import CreateFund from "@/pages/CreateFund";
+import Loading from "@/components/Loading";
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
       />
       <DynamicBackground />
       <GlobalState>
+        <Loading />
         <AuthState>
           <div className="py-6 px-12">
             <Router>
@@ -43,6 +46,7 @@ function App() {
 
                 {/* Services */}
                 <Route path="/funds" element={<Funds />} />
+                <Route path="/createfund" element={<CreateFund />} />
 
                 <Route path="*" element={<_404 />} />
               </Routes>

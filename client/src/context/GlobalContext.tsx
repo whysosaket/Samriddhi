@@ -1,9 +1,10 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 const GlobalContext = createContext<any>({});
 import { toast } from "react-toastify";
 // let url = import.meta.env.VITE_URL;
 
 const GlobalState = (props: any) => {
+  const [loading, setLoading] = useState(false);
   const toastMessage = (message: string, type: string) => {
     if (type === "success") toast.success(message);
     else if (type === "error") toast.error(message);
@@ -12,7 +13,7 @@ const GlobalState = (props: any) => {
   };
 
   return (
-    <GlobalContext.Provider value={{ toastMessage }}>
+    <GlobalContext.Provider value={{ toastMessage, loading, setLoading }}>
       {props.children}
     </GlobalContext.Provider>
   );

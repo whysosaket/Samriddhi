@@ -36,7 +36,7 @@ export function SignupFormDemo() {
           Welcome to {appName}
         </h2>
         <p className="text-sm max-w-sm mt-2 dark:text-neutral-300">
-          Sign up to {appName}. Start learning now.
+          Sign up to {appName}. Start earning now.
         </p>
 
         <div className="my-8">

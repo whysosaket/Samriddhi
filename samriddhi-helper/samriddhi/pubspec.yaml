@@ -37,7 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_sms_inbox: ^1.0.3
   permission_handler: ^11.3.0
-  sms_advanced: ^1.1.0
+  http: ^1.2.1
+
 
 dev_dependencies:
   flutter_test:

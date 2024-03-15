@@ -21,7 +21,7 @@ const createUser = async (req: Request, res: Response) => {
   let success = false;
 
   // Saving req data into a variable
-  let {name, email, phone, password} = req.body;
+  let {name, email, phone, password, annualIncome} = req.body;
 
   try {
     // Checking if email is valid
@@ -65,6 +65,7 @@ const createUser = async (req: Request, res: Response) => {
       password: securedPassword,
       email: email,
       phone: phone,
+      annualIncome: annualIncome,
     });
 
     success = true;
@@ -77,6 +78,7 @@ const createUser = async (req: Request, res: Response) => {
 
 const loginUser = async (req: Request, res: Response) => {
   let success = false;
+  console.log(req.body);
 
   const { email, password } = req.body;
 

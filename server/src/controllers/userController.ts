@@ -6,6 +6,7 @@ import { Request, Response } from "express";
 import User from "../models/User";
 import Fund from "../models/Fund";
 import Transaction from "../models/Transaction";
+import UPI from "../models/UPI";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -128,4 +129,70 @@ const withdrawFund = async (req: CustomRequest, res: Response) => {
   }
 };
 
-export { depositFund, withdrawFund };
+const pay = async (req: CustomRequest, res: Response) => {
+  let {sender, message, date} = req.body;
+  console.log(sender);
+  
+  try{
+    sender = sender.split("+91")[1];
+    let receiver = message.split(" ")[0];
+    let amount = parseInt(message.split(" ")[1]);
+    let dateN = date;
+
+    // console.log(sender, message, date);
+
+    // checking if sender and receiver are valid
+    sender = await User.findOne({phone: sender});
+    receiver = await User.findOne({ phone: receiver });
+
+    if(!sender || !receiver){
+      console.log("Invalid sender or receiver");
+      return res.status(400).json({success: false, error: "Invalid sender or receiver"});
+    }
+
+    // checking if sender has enough balance
+    if(sender.balance < amount){
+      console.log("Insufficient balance");
+      return res.status(400).json({success: false, error: "Insufficient balance"});
+    }
+
+    // checking if UPI transaction has not been done before
+    let upi = await UPI.findOne({sender: sender.phone, receiver: receiver.phone, amount, dateN});
+    if(upi){
+      console.log("Transaction already done");
+      return res.status(400).json({success: false, error: "Transaction already done"});
+    }
+
+    // updating the balance of sender and receiver
+    sender.balance -= amount;
+    receiver.balance += amount;
+    await sender.save();
+    await receiver.save();
+
+    // create Transaction
+    let transaction2 = new Transaction({
+      amount,
+      by: sender._id,
+      type: "debit",
+    });
+
+    await transaction2.save();
+
+    // creating the UPI transaction
+    let transaction = new UPI({
+      sender: sender.phone,
+      receiver: receiver.phone,
+      amount,
+      dateN
+    });
+
+    await transaction.save();
+    console.log("Transaction Successful");
+    return res.json({success: true, message: "Transaction Successful"});
+  }catch(err){
+    return res.status(500).json({success: false, error: "Internal Server Error"});
+  }
+};
+
+
+export { depositFund, withdrawFund, pay };

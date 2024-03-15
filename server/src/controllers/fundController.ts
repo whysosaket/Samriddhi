@@ -21,6 +21,7 @@ import {
 import CustomRequest from "../types/CustomRequest";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
+const IP = process.env.IP as string;
 
 const createFund = async (req: CustomRequest, res: Response) => {
   let { name, generalInterest } = req.body;
@@ -47,7 +48,7 @@ const createFund = async (req: CustomRequest, res: Response) => {
 
     await fund.save();
     success = true;
-    const uri = `http://172.20.44.180:5173/joinfund/${fund._id}`;
+    const uri = `${IP}:5173/joinfund/${fund._id}`;
     QRCode.toDataURL(uri, function (err, imgurl) {
       return res.json({ success: true, imgurl, uri });
     });
@@ -122,7 +123,7 @@ const getFundQR = async (req: CustomRequest, res: Response) => {
   const { fundId } = req.body;
   let success = false;
   try {
-    const uri = `http://172.20.44.180:5173/joinfund/${fundId}`;
+    const uri = `${IP}:5173/joinfund/${fundId}`;
     QRCode.toDataURL(uri, function (err, imgurl) {
       return res.json({ success: true, imgurl, uri });
     });

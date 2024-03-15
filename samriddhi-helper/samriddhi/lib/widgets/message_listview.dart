@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
-import 'package:flutter_sms/flutter_sms.dart';
 
 const fabssphone = '+919596181712';
 const fabssphone2 = '9596181712';
@@ -39,15 +38,4 @@ class MessagesListView extends StatelessWidget {
       },
     );
   }
-}
-
-String message = "This is a test message!";
-List<String> recipents = ["9596181712"];
-
-void _sendSMS(String message, List<String> recipents) async {
-  String _result = await sendSMS(message: message, recipients: recipents)
-      .catchError((onError) {
-    print(onError);
-  });
-  print(_result);
 }

@@ -48,7 +48,7 @@ const createFund = async (req: CustomRequest, res: Response) => {
 
     await fund.save();
     success = true;
-    const uri = `${IP}:5173/joinfund/${fund._id}`;
+    const uri = `${IP}/joinfund/${fund._id}`;
     QRCode.toDataURL(uri, function (err, imgurl) {
       return res.json({ success: true, imgurl, uri });
     });
@@ -123,7 +123,7 @@ const getFundQR = async (req: CustomRequest, res: Response) => {
   const { fundId } = req.body;
   let success = false;
   try {
-    const uri = `${IP}:5173/joinfund/${fundId}`;
+    const uri = `${IP}/joinfund/${fundId}`;
     QRCode.toDataURL(uri, function (err, imgurl) {
       return res.json({ success: true, imgurl, uri });
     });

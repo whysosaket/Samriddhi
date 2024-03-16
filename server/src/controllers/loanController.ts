@@ -151,6 +151,16 @@ const approveLoan = async (req: CustomRequest, res: Response) => {
       loanuser.balance += loan.amount;
       await loanuser.save();
 
+      // create transaction
+      // @ts-ignore
+      const transaction = new Transaction({
+        amount: loan.amount,
+        // @ts-ignore
+        by: fund._id,
+        to: loanuser._id,
+        type: "loan",
+      });
+
       // create notification for user
       let notification = new Notifications({
         message: `Your loan of ${loan.amount} has been approved`,

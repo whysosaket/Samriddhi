@@ -49,6 +49,7 @@ const depositFund = async (req: CustomRequest, res: Response) => {
         amount,
         by: myuser._id,
         type: "credit",
+        fund: fund._id
       });
 
       await transaction.save();
@@ -64,6 +65,7 @@ const depositFund = async (req: CustomRequest, res: Response) => {
         amount,
         by: myuser._id,
         type: "credit",
+        to: myuser._id
       });
       await transaction.save();
       await myuser.save();
@@ -103,6 +105,7 @@ const withdrawFund = async (req: CustomRequest, res: Response) => {
         amount,
         by: myuser._id,
         type: "debit",
+        fund: fund._id
       });
 
       await transaction.save();
@@ -127,6 +130,7 @@ const withdrawFund = async (req: CustomRequest, res: Response) => {
         amount,
         by: myuser._id,
         type: "debit",
+        to: myuser._id
       });
       await transaction.save();
       await myuser.save();
@@ -183,6 +187,7 @@ const pay = async (req: CustomRequest, res: Response) => {
       amount,
       by: sender._id,
       type: "debit",
+      to: receiver._id
     });
 
     await transaction2.save();
@@ -203,5 +208,26 @@ const pay = async (req: CustomRequest, res: Response) => {
   }
 };
 
+const getTransactions = async (req: CustomRequest, res: Response) => {
+  let success = false;
+  let user = req.user;
+  try {
+    // check if user is valid
+    if (!user) {
+      return res.status(401).json({ success, error: "Unauthorized" });
+    }
+    let myuser = await User.findById(user.id);
+    if (!myuser) {
+      return res.status(401).json({ success, error: "Unauthorized" });
+    }
 
-export { depositFund, withdrawFund, pay };
+    let transactions = await Transaction.find({ by: myuser._id }).populate("fund").populate("to", "name").populate("by", "name");
+    success = true;
+    return res.json({ success, transactions });
+  } catch (err) {
+    return res.status(500).json({ success, error: "Internal Server Error" });
+  }
+}
+
+
+export { depositFund, withdrawFund, pay, getTransactions };

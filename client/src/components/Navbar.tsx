@@ -59,7 +59,7 @@ console.log(window.innerWidth)
                   <Link to="/services">Services</Link>
                 </li>
                 <li className="mx-4">
-                  <Link to="/about">About</Link>
+                  <Link to="/transactions">Transactions</Link>
                 </li>
               </ul>
             </div>

@@ -43,4 +43,23 @@ const getSchemes = async (req: Request, res: Response) => {
   }
 };
 
-export { chatbot, getSchemes };
+const maxLoan = async (req: Request, res: Response) => {
+  const { income, age, dependents } = req.body;
+
+  try {
+    const response = await fetch(`${FLASK_URL}/max_loan`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({income: parseInt(income), age: parseInt(age), dependents: parseInt(dependents)}),
+    });
+    const data = await response.json();
+    return res.json(data);
+  } catch (error) {
+    console.log(error);
+    return res.json({ success: false, error: "Something went wrong!" });
+  }
+}
+
+export { chatbot, getSchemes, maxLoan };

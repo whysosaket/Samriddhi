@@ -59,9 +59,33 @@ const GlobalState = (props: any) => {
     }
   }
 
+  const maxLoan = async (income: number, age: number, dependent: number) => {
+    try {
+      const response = await fetch(`${url}/api/flask/maxLoan`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ income, age, dependent }),
+      });
+
+      const data = await response.json();
+      if (data) {
+        toastMessage(data.info, "success");
+        return data.max_loan;
+      } else {
+        toastMessage(data.error, "error");
+        return false;
+      }
+    } catch (error) {
+      console.log(error);
+      toastMessage("Something went wrong!", "error");
+    }
+  }
+
 
   return (
-    <GlobalContext.Provider value={{ toastMessage, loading, setLoading, getSchemes, chatbot }}>
+    <GlobalContext.Provider value={{ toastMessage, loading, setLoading, getSchemes, chatbot, maxLoan }}>
       {props.children}
     </GlobalContext.Provider>
   );

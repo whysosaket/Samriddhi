@@ -1,15 +1,38 @@
+
 # Samriddhi Financial Application
 
-### Samriddhi
+## Overview
 
 Samriddhi is a full-stack financial application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) along with Framer Motion, Atropos, and Tailwind CSS. It aims to revolutionize financial services by offering digital payments, fund management, insurance integration, and enhanced security features.
 
 ## Features
 
-- **Digital Payments:** Seamlessly make payments using phone numbers without requiring a smartphone. Verification is done using voice recognition for added security.
-- **Fund Management:** Create and manage community funds with rotating roles for fund managers. Participants can contribute to national funds for collective financial assistance.
-- **Insurance Integration:** Access insurance products tailored to individual needs, enhancing financial security and stability.
-- **Enhanced Security:** Transactions are safeguarded with multi-factor authentication, including secure PINs and voice recognition for verification.
+1. **Auth (Signup/Login):** Secure authentication system for users to sign up and log in to their accounts.
+2. **Create, Join, Manage Funds:** Ability to create, join, and manage funds with rotating roles for fund managers.
+3. **Join the Fund using QR Code:** Conveniently join funds using QR codes for seamless integration.
+4. **Loan (Request/Approve Loans):** Facilitates loan requests and approvals within the application.
+5. **Withdraw/Deposit Money:** Easy withdrawal and deposit of money from user accounts.
+6. **SMS UPI Payment (API):** Integration with SMS-based UPI payment system for efficient transactions.
+7. **Get Government Schemes:** Access government schemes and benefits through integrated APIs.
+8. **Interest Calculator:** Calculate interest rates for loans and investments.
+9. **Proportional Interest:** Manage proportional interest calculations for funds and investments.
+10. **Automatic Fund Selector for Loans:** Automated fund selection based on loan requirements and criteria.
+11. **AI Assistant for Financial Consultation:** AI-driven financial consultation services for users.
+12. **Risk Assessment for Loan Amount:** Assess loan amounts based on risk factors and user data.
+13. **Mostly Responsive Design (Both PC and Mobile View):** Ensures a responsive design for both desktop and mobile users.
+
+## UI
+### Desktop Landing Page
+<img src="./screenshots/1.png" />
+
+### Get Government Schemes
+<img src="./screenshots/2.png" />
+
+### Mobile Views
+<div style="display: flex; justify-content: space-between;">
+   <img src="./screenshots/3.jpeg" style="width: 25%;" />
+   <img src="./screenshots/4.jpeg" style="width: 25%;" />
+</div>
 
 ## Technologies Used
 
@@ -57,11 +80,6 @@ To run the application locally, follow these steps:
 
 6. Access the application in your browser at `http://localhost:5173`.
 
-## Contributing
+---
 
-Contributions are welcome! Please fork the repository and create a pull request with your changes. For major updates, please open an issue first to discuss the proposed changes.
-
-
-## Contact
-
-For any inquiries or feedback, please contact [Your Name](mailto:your.email@example.com).
+Feel free to customize and expand upon this README as needed for your project documentation. If you have any specific requirements or questions, let me know!

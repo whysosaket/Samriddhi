@@ -27,6 +27,7 @@ import Success from "./pages/Success";
 import Fund from "./pages/Fund/Fund";
 import Transactions from "./pages/Transactions";
 import Government from "./pages/Government";
+import AI from "./pages/AI";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/government" element={<Government />} />
+                <Route path="/ai" element={<AI />} />
 
                 {/* Services */}
                 <Route path="/funds" element={<Funds />} />

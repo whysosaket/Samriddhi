@@ -12,6 +12,7 @@ const GlobalState = (props: any) => {
     else toast.info(message);
   };
 
+
   return (
     <GlobalContext.Provider value={{ toastMessage, loading, setLoading }}>
       {props.children}

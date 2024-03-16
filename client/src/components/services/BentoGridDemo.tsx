@@ -17,8 +17,6 @@ import _5 from "@/assets/5.jpg";
 import _6 from "@/assets/6.jpg";
 import _7 from "@/assets/7.jpg";
 
-const images = [_1, _2, _3, _4, _5, _6, _7];
-
 
 export function BentoGridDemo() {
   return (

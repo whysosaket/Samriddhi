@@ -25,6 +25,11 @@ const depositFund = async (req: CustomRequest, res: Response) => {
   let success = false;
   let user = req.user;
   try {
+
+    if(amount <= 0){
+      return res.status(400).json({ success, error: "Invalid amount" });
+    }
+
     // check if user is valid
     if (!user) {
       return res.status(401).json({ success, error: "Unauthorized" });
@@ -75,6 +80,10 @@ const withdrawFund = async (req: CustomRequest, res: Response) => {
   let success = false;
   let user = req.user;
   try {
+    if(amount <= 0){
+      return res.status(400).json({ success, error: "Invalid amount" });
+    }
+
     // check if user is valid
     if (!user) {
       return res.status(401).json({ success, error: "Unauthorized" });

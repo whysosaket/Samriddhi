@@ -125,7 +125,7 @@ const LoanState = (props: any) => {
 
       const data = await response.json();
       if (data.success) {
-        toastMessage(data.info, "success");
+        toastMessage("Loan Approval Successful!!", "success");
         return true;
       } else {
         toastMessage(data.error, "error");

@@ -54,12 +54,12 @@ const items = [
     link: "/loans",
   },
   {
-    title: "Insurance Coverage",
+    title: "Government Schemes",
     description:
-      "Secure your future with comprehensive insurance plans designed to protect you and your loved ones.",
+      "Explore and apply for government schemes and grants with ease and transparency.",
     header: <Skeleton img={_2} />,
     icon: <IconFileBroken className="h-4 w-4 text-neutral-500" />,
-    link: "/insurance",
+    link: "/government",
   },
   {
     title: "Digital Payments",

@@ -26,6 +26,7 @@ import { LoanState } from "./context/LoanContext";
 import Success from "./pages/Success";
 import Fund from "./pages/Fund/Fund";
 import Transactions from "./pages/Transactions";
+import Government from "./pages/Government";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/services" element={<Services />} />
+                <Route path="/government" element={<Government />} />
 
                 {/* Services */}
                 <Route path="/funds" element={<Funds />} />

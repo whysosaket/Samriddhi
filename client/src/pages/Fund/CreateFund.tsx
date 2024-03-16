@@ -1,7 +1,18 @@
 import CreateFundForm from '@/components/funds/CreateFundForm'
 import {motion} from 'framer-motion'
+import { useEffect } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 
 const CreateFund = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if(localStorage.getItem('auth-token') == null) navigate('/login');
+  }, []);
+
+
   return (
     <div className="px-5">
     <motion.h1

@@ -5,6 +5,7 @@ import FundContext from "@/context/FundContext";
 import Success from "@/components/funds/Success";
 
 const JoinFund = () => {
+  
   const location = useLocation()
   const navigate = useNavigate();
   let id = location.pathname.split("/")[2];
@@ -19,6 +20,11 @@ const JoinFund = () => {
       navigate("/");
       toastMessage("Invalid fund", "error");
     }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if(localStorage.getItem('auth-token') == null) navigate('/login');
   }, []);
 
   const handleJoin = async () => {

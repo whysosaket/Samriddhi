@@ -1,12 +1,18 @@
 import { useEffect, useState, useContext } from "react"
 import FundContext from "@/context/FundContext"
 import {motion} from "framer-motion"
+import { useNavigate } from "react-router-dom"
 
 const Transactions = () => {
     const { getTransactions } = useContext(FundContext);
     const [transactions, setTransactions] = useState<any[]>([]);
 
-    
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      if(localStorage.getItem('auth-token') == null) navigate('/login');
+    }, []);
     useEffect(() => {
         const fetchTransactions = async () => {
             const transactions = await getTransactions();

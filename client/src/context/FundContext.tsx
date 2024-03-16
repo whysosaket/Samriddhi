@@ -197,7 +197,7 @@ const FundState = (props: any) => {
       if (data.success) {
         return data.transactions;
       } else {
-        toastMessage(data.error, "error");
+        // toastMessage(data.error, "error");
         return false;
       }
     } catch (error) {

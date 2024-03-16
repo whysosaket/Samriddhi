@@ -4,6 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { MdLibraryAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
 import FundContext from "@/context/FundContext";
+import { useNavigate } from "react-router-dom";
 
 
 const Funds = () => {
@@ -19,6 +20,13 @@ const Funds = () => {
             setFunds(funds);
         };
         fetchFunds();
+    }, []);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      if(localStorage.getItem('auth-token') == null) navigate('/login');
     }, []);
 
   return (

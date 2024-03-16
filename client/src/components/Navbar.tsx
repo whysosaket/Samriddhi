@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useContext } from "react";
 import AuthContext from "@/context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const isMobile = window.innerWidth < 768;
@@ -13,6 +14,13 @@ console.log(window.innerWidth)
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
+  }
 
   return (
     <motion.nav
@@ -92,7 +100,7 @@ console.log(window.innerWidth)
               <li className="flex justify-end bg-white/0 px-4 py-2 w-5/6">
                 {isAuthenticated ? (
                   <button
-                    onClick={logout}
+                    onClick={handleLogout}
                     className=" bg-primary hover:bg-[#e37655] text-black px-8 py-2 rounded-lg mr-0 my-auto"
                   >
                     Logout

@@ -1,7 +1,15 @@
 import tick from "@/assets/tick.svg";
 import {motion} from "framer-motion";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Success = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      if(localStorage.getItem('auth-token') == null) navigate('/login');
+    }, []);
   return (
     <motion.div
     initial={{ opacity: 0, y: -180 }}

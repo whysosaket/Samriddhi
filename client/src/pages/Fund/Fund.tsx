@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import PieChart from "@/components/charts/PieChart";
 import LineChart from "@/components/charts/LineChart";
 import { FaToggleOff } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const Fund = () => {
   const location = useLocation();
@@ -44,6 +45,13 @@ const Fund = () => {
     };
 
     fetchFundUserInfo();
+  }, []);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if(localStorage.getItem('auth-token') == null) navigate('/login');
   }, []);
 
   const toggleInvestments = () => {

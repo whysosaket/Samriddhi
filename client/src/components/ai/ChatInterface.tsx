@@ -48,7 +48,8 @@ const ChatInterface = () => {
                             return <>
                             <div key={index} className="grid grid-cols-12 gap-y-2">
                                 <MeChat message={myMessages[index]} />
-                                <TheyChat message={theirMessages[index]} />;
+                                <TheyChat message={theirMessages[index]} />
+                                <p className="hidden">{message}</p>
                             </div>
                             </>
                         })

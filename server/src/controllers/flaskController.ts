@@ -24,7 +24,7 @@ const chatbot = async (req: Request, res: Response) => {
   }
 };
 
-const get_schemes = async (req: Request, res: Response) => {
+const getSchemes = async (req: Request, res: Response) => {
   const { income, age, urban_rular } = req.body;
 
   try {
@@ -33,9 +33,8 @@ const get_schemes = async (req: Request, res: Response) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(income, age, urban_rular),
+      body: JSON.stringify({income: parseInt(income), age: parseInt(age), urban_rural: urban_rular}),
     });
-
     const data = await response.json();
     return res.json(data);
   } catch (error) {
@@ -44,4 +43,4 @@ const get_schemes = async (req: Request, res: Response) => {
   }
 };
 
-export { chatbot, get_schemes };
+export { chatbot, getSchemes };

@@ -1,4 +1,8 @@
-const TheyChat = () => {
+interface TheyChatProps {
+    message: string;
+    }
+
+const TheyChat:React.FunctionComponent<TheyChatProps> = ({message}) => {
   return (
     <>
       <div className="col-start-1 col-end-8 p-3 rounded-lg">
@@ -7,7 +11,7 @@ const TheyChat = () => {
             C
           </div>
           <div className="relative ml-3 text-sm bg-white/10 text-white py-2 px-4 shadow rounded-xl">
-            <div>Hey How are you today?</div>
+            <div>{message}</div>
           </div>
         </div>
       </div>

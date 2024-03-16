@@ -1,6 +1,10 @@
+import React from "react";
 
+interface MeChatProps {
+    message: string;
+}
 
-const MeChat = () => {
+const MeChat: React.FunctionComponent<MeChatProps> = ({message}) => {
   return (
     <>
       <div className="col-start-6 col-end-13 p-3 rounded-lg">
@@ -9,7 +13,7 @@ const MeChat = () => {
             Me
           </div>
           <div className="relative mr-3 text-sm bg-indigo-100/10 text-white py-2 px-4 shadow rounded-xl">
-            <div>I'm ok what about you?</div>
+            <div>{message}</div>
           </div>
         </div>
       </div>

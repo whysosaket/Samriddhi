@@ -10,7 +10,7 @@ import { FaToggleOff } from "react-icons/fa6";
 const Fund = () => {
   const location = useLocation();
   const fundId = location.pathname.split("/")[2];
-  const { getFund } = useContext(FundContext);
+  const { getFund, getFundUserInfo } = useContext(FundContext);
   const { getFundLoans, approveLoan } = useContext(LoanContext);
   const [fund, setFund] = useState({
     name: "",
@@ -21,6 +21,7 @@ const Fund = () => {
   const [fundLoans, setFundLoans] = useState([]);
 
   const [isInvestment, setIsInvestment] = useState(false);
+  const [fundUserInfo, setFundUserInfo] = useState({userInterest: 0, interestAmount: 0});
 
   useEffect(() => {
     const fetchFund = async () => {
@@ -32,11 +33,17 @@ const Fund = () => {
 
     const fetchFundLoans = async () => {
       const loans = await getFundLoans(fundId);
-      console.log(loans);
       setFundLoans(loans);
     };
 
     fetchFundLoans();
+
+    const fetchFundUserInfo = async () => {
+      const userInfo = await getFundUserInfo(fundId);
+      setFundUserInfo(userInfo);
+    };
+
+    fetchFundUserInfo();
   }, []);
 
   const toggleInvestments = () => {
@@ -73,6 +80,25 @@ const Fund = () => {
         {" "}
         General Interest: {fund.generalInterest}%
       </motion.h1>
+      <motion.h1
+        initial={{ x: -200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.2 }}
+        className="mt-2 text-sm text-gray-400"
+      >
+        {" "}
+        Your Interest: ₹{fundUserInfo.userInterest}
+      </motion.h1>
+      <motion.h1
+        initial={{ x: -200, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 1, delay: 0.2 }}
+        className="mt-2 text-sm text-gray-400"
+      >
+        {" "}
+        Total Fund Interest: ₹{fundUserInfo.interestAmount}
+      </motion.h1>
+
 
       <div className="flex">
         <div className="w-1/2">
@@ -150,7 +176,7 @@ const Fund = () => {
           initial={{ x: 200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="px-8 pl-32 pt-28"
+          className="px-8 pl-32 pt-8"
         >
           {isInvestment ? <LineChart /> : <PieChart />}
           <button

@@ -7,6 +7,7 @@ import User from "../models/User";
 import Fund from "../models/Fund";
 import Notifications from "../models/Notifications";
 import Loan from "../models/Loan";
+import Transaction from "../models/Transaction";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -148,5 +149,67 @@ const getFundInfo = async (req: CustomRequest, res: Response) => {
   }
 }
 
+const getFundUserInfo = async (req: CustomRequest, res: Response) => {
+  const {fundId} = req.body;
+  let success = false;
+  const user = req.user;
+  try {
+    // check if user is valid
+    if (!user) {
+      return res.status(401).json({ success, error: "Unauthorized" });
+    }
 
-export { createFund, joinFund, getMyFunds, getFundQR, getFundInfo };
+    const myuser = await User.findById(user.id);
+    if (!myuser) {
+      return res.status(401).json({ success, error: "Unauthorized" });
+    }
+
+    // get all transactions
+    const transactions = await Transaction.find({}).populate("by to fund");
+
+    // get loans for this fund
+    const loans = await Loan.find({ fund: fundId }).populate("user");
+
+    // get % of fund balance current user gave
+    let totalFundBalance = 0;
+    for(let i = 0; i < loans.length;i++){
+      let loan = loans[i];
+      if(loan.status == "approved"&&loan.fund == fundId){
+        totalFundBalance += loan.amount;
+      }
+    }
+
+    let userDeposit = 0;
+    for(let i = 0; i < transactions.length;i++){
+       let transaction = transactions[i];
+       // @ts-ignore
+       console.log(transaction.fund&&transaction.fund._id.toString() == fundId);
+        if(transaction.fund&&transaction.fund._id.toString() == fundId){
+          if(transaction.by&&transaction.by._id.toString() == myuser._id.toString()){
+            if(transaction.type == "credit") userDeposit += transaction.amount;
+            else userDeposit -= transaction.amount;
+          }
+        }
+    }
+
+    console.log(userDeposit);
+
+
+    let percetage = (userDeposit/totalFundBalance)*100;
+    // monthly interest amount
+    let interestAmount = 0;
+    let fund = await Fund.findById(fundId);
+
+    if(fund){
+      interestAmount = (fund.generalInterest/100)*totalFundBalance;
+    }
+
+    let userInterest = (percetage/100)*interestAmount;
+    success = true;
+    return res.json({ success, userDeposit, userInterest: userInterest.toFixed(2), interestAmount: interestAmount.toFixed(2), percetage });
+  } catch (err) {
+    return res.status(500).json({ success, error: "Internal Server Error" });
+  }
+}
+
+export { createFund, joinFund, getMyFunds, getFundQR, getFundInfo, getFundUserInfo };

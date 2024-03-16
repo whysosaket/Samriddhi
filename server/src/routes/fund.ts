@@ -1,6 +1,6 @@
 import { Router, Response } from "express";
 
-import {createFund, joinFund, getMyFunds, getFundQR, getFundInfo } from "../controllers/fundController";
+import {createFund, joinFund, getMyFunds, getFundQR, getFundInfo, getFundUserInfo } from "../controllers/fundController";
 import fetchuser from "../middleware/fetchuser";
 
 export default (router: Router) => {
@@ -9,4 +9,5 @@ export default (router: Router) => {
     router.route("/api/fund/myfunds").get(fetchuser, (req: any, res: Response) => getMyFunds(req, res));
     router.route("/api/fund/getqr").post(fetchuser, (req: any, res: Response) => getFundQR(req, res));
     router.route("/api/fund/getinfo").post(fetchuser, (req: any, res: Response) => getFundInfo(req, res));
+    router.route("/api/fund/getuserinfo").post(fetchuser, (req: any, res: Response) => getFundUserInfo(req, res));
 } 

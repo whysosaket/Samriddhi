@@ -85,22 +85,22 @@ console.log(window.innerWidth)
                 </Link>
               </li>
               <li className="my-2 lg:my-0 lg:mx-4 bg-white/10 px-4 py-2 w-5/6">
-                <Link to="/about" onClick={toggleMobileMenu}>
-                  About
+                <Link to="/transactions" onClick={toggleMobileMenu}>
+                  Transactions
                 </Link>
               </li>
               <li className="flex justify-end bg-white/0 px-4 py-2 w-5/6">
                 {isAuthenticated ? (
                   <button
                     onClick={logout}
-                    className=" bg-primary hover:bg-[#e37655] text-black px-8 py-2 rounded-lg mx-4 my-auto"
+                    className=" bg-primary hover:bg-[#e37655] text-black px-8 py-2 rounded-lg mr-0 my-auto"
                   >
                     Logout
                   </button>
                 ) : (
                   <Link
                     to="/signup"
-                    className=" bg-primary hover:bg-[#e37655] text-black px-8 py-2 rounded-lg mx-4 my-auto"
+                    className=" bg-primary hover:bg-[#e37655] text-black px-8 py-2 rounded-lg mr-0 my-auto"
                   >
                     Get Started
                   </Link>

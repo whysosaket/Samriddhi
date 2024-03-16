@@ -27,7 +27,7 @@ const Loans = () => {
 
 
   return (
-    <div className="mt-8 quando w-full px-8">
+    <div className="mt-8 quando w-full md:px-8 px-2">
       <div className="w-full flex justify-between align-middle">
       <motion.h1
       initial={{ x: -200, opacity: 0 }}
@@ -39,8 +39,8 @@ const Loans = () => {
       </Link>
       </div>
 
-      <div className="w-full flex px-2">
-        <div className="w-1/2">
+      <div className="w-full md:flex px-2">
+        <div className="md:w-1/2">
           {
               loans.map((loan, index) => {
                 console.log(loan);
@@ -66,7 +66,7 @@ const Loans = () => {
               })
           }
         </div>
-        <div className="w-1/2 px-12 mt-28">
+        <div className="md:w-1/2 md:px-12 md:mt-28 mt-12">
            <motion.div
            initial={{ x: 200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}

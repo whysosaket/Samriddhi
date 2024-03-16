@@ -12,12 +12,12 @@ const Login = () => {
   return (
     <motion.div
       {...animationProps}
-      className="pt-24 max-h-screen overflow-hidden flex align-middle justify-center"
+      className="pt-24 max-h-screen overflow-hidden flex md:flex-row flex-col-reverse align-middle justify-center"
     >
       <div className="flex justify-center align-middle">
         <LoginFormDemo />
       </div>
-      <div className="flex justify-center align-middle w-1/2 hover:opacity-70">
+      <div className="flex justify-center align-middle md:w-1/2 hover:opacity-70">
         <Atropos
           activeOffset={70}
           shadowScale={1.05}
@@ -26,7 +26,7 @@ const Login = () => {
           onRotate={(x, y) => console.log("Rotate", x, y)}
           className="m-auto "
         >
-          <img src={SignupImage} className="max-w-96" />
+          <img src={SignupImage} className="md:max-w-96 max-w-44 md:mb-0 mb-12" />
         </Atropos>
       </div>
     </motion.div>

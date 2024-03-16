@@ -32,7 +32,7 @@ export function SignupFormDemo() {
     }
   };
   return (
-    <div className="w-full px-16 my-auto">
+    <div className="w-full md:px-16 px-4 my-auto">
       <div className="w-full rounded-none md:rounded-2xl p-10 shadow-input bg-black/50">
         <h2 className="font-bold text-xl text-neutral-200">
           Welcome to {appName}

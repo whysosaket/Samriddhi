@@ -47,7 +47,7 @@ function App() {
         <AuthState>
           <FundState>
             <LoanState>
-          <div className="py-6 md;px-12 px-4">
+          <div className="py-6 md:px-12 px-4">
             <Router>
               <Navbar />
               <Routes>

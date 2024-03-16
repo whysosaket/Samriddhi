@@ -52,7 +52,7 @@ const Fund = () => {
 
   return (
     <div className="quando mt-8 px-8">
-      <div className="flex justify-between">
+      <div className="md:flex justify-between">
         <motion.h1
           initial={{ x: -200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -100,8 +100,8 @@ const Fund = () => {
       </motion.h1>
 
 
-      <div className="flex">
-        <div className="w-1/2">
+      <div className="md:flex">
+        <div className="md:w-1/2">
           <div>
             <motion.h1
               initial={{ x: -200, opacity: 0 }}
@@ -142,7 +142,7 @@ const Fund = () => {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 1, delay: 0.7 + index * 0.2 }}
                   key={index}
-                  className="w-full flex justify-between align-middle bg-white/10 hover:bg-white/30 cursor-pointer p-4 rounded-xl mt-4"
+                  className="w-full md:flex justify-between align-middle bg-white/10 hover:bg-white/30 cursor-pointer p-4 rounded-xl mt-4"
                 >
                   <div>
                     <h1>Name: {loan.user.name}</h1>
@@ -176,7 +176,7 @@ const Fund = () => {
           initial={{ x: 200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
-          className="px-8 pl-32 pt-8"
+          className="md:px-8 md:pl-32 pt-8"
         >
           {isInvestment ? <LineChart /> : <PieChart />}
           <button

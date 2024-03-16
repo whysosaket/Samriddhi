@@ -44,7 +44,7 @@ const CreateFundForm = () => {
     initial={{ opacity: 0, x: -100 }}
     animate={{ opacity: 1, x: 0 }}
     transition={{ duration: 0.6 }}
-    className="w-2/3 px-16 my-auto">
+    className="md:w-2/3 md:px-16 my-auto">
       <div className="w-full rounded-none md:rounded-2xl p-10 shadow-input bg-black/50">
         <h2 className="font-bold text-xl text-neutral-200">
           {created?"Join":"Create"} a {appName} Fund

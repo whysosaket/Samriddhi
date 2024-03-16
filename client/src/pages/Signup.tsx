@@ -11,9 +11,9 @@ const Signup = () => {
   return (
     <motion.div
       {...animationProps}
-      className="pt-12 max-h-screen overflow-hidden flex"
+      className="pt-12 md:max-h-screen overflow-hidden md:flex"
     >
-      <div className="flex justify-center align-middle w-1/2 hover:opacity-70">
+      <div className="flex justify-center align-middle md:w-1/2  hover:opacity-70">
         <Atropos
           activeOffset={70}
           shadowScale={1.05}
@@ -22,10 +22,10 @@ const Signup = () => {
           onRotate={(x, y) => console.log("Rotate", x, y)}
           className="m-auto "
         >
-          <img src={SignupImage} className="transform -scale-x-100 max-w-96" />
+          <img src={SignupImage} className="transform -scale-x-100 md:max-w-96 max-w-44" />
         </Atropos>
       </div>
-      <div className="flex justify-center align-middle">
+      <div className="flex justify-center align-middle md:mt-0 mt-12">
         <SignupFormDemo />
       </div>
     </motion.div>

@@ -20,7 +20,7 @@ const Home = () => {
             Hey!
           </h1>
         </div>
-        <div className="md:text-[5rem] text-[2rem] ml-10 quando">
+        <div className="md:text-[5rem] text-[2.5rem] ml-10 quando">
           <motion.h1
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
@@ -50,14 +50,14 @@ const Home = () => {
           transition={{ duration: 1, delay: 0 }}
           className="w-full flex mt-12 ml-10 overflow-hidden "
         >
-          <div className="w-1/3 flex align-middle">
+          <div className="md:w-1/3 flex align-middle">
             <h1 className="text-5xl my-auto">3</h1>
             <div className="my-auto ml-3 text-gray-400">
               <h1 className="text-sm">Years of</h1>
               <h1 className="text-sm">Experience</h1>
             </div>
           </div>
-          <div className="w-1/3 flex align-middle">
+          <div className="md:w-1/3 flex align-middle">
             <h1 className="text-5xl my-auto">5M</h1>
             <div className="my-auto ml-3 text-gray-400">
               <h1 className="text-sm">Users</h1>
@@ -66,7 +66,7 @@ const Home = () => {
           </div>
         </motion.div>
       </motion.div>
-      <div className="w-2/5">
+      <div className="md:w-2/5 max-w-screen overflow-hidde">
         <Background />
         <div className="mt-48 z-50">
           <motion.div
